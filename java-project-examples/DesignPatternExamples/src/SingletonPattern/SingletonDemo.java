@@ -2,6 +2,9 @@ package SingletonPattern;
 
 public class SingletonDemo {
 
+    /**
+     * @Link https://dzone.com/articles/java-singletons-using-enum
+     */
     public static void main(String[] args) {
 
         SingletonBase object = SingletonBase.getInstance();
@@ -21,5 +24,11 @@ public class SingletonDemo {
 
         SingletonDoubleCheckedLock object4 = SingletonDoubleCheckedLock.getInstance();
         object4.showMessage();
+
+        SingletonStaticInnerClass object5 = SingletonStaticInnerClass.getInstance();
+        object5.showMessage();
+
+        SingletonUsingEnum object6 = SingletonUsingEnum.INSTANCE;
+        object6.showMessage();
     }
 }
