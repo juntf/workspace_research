@@ -1,7 +1,10 @@
-package FactoryPattern;
+package DP01FactoryPattern;
 
 public class FactoryPatternDemo {
-
+    /**
+     * https://www.runoob.com/design-pattern/factory-pattern.html
+     * @param args
+     */
     public static void main(String[] args) {
 
         // ShapeFactory

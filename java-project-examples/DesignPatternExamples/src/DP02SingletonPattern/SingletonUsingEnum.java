@@ -1,4 +1,4 @@
-package SingletonPattern;
+package DP02SingletonPattern;
 
 public enum SingletonUsingEnum {
 

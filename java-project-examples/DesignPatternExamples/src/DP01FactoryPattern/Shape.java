@@ -1,4 +1,4 @@
-package FactoryPattern;
+package DP01FactoryPattern;
 
 public interface Shape {
     void draw();

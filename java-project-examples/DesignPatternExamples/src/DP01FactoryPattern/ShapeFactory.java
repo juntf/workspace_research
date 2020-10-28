@@ -1,4 +1,4 @@
-package FactoryPattern;
+package DP01FactoryPattern;
 
 // Factory-Class
 public class ShapeFactory {

@@ -1,9 +1,11 @@
-package SingletonPattern;
+package DP02SingletonPattern;
 
 public class SingletonDemo {
 
     /**
-     * @Link https://dzone.com/articles/java-singletons-using-enum
+     * https://www.runoob.com/design-pattern/singleton-pattern.html
+     * https://dzone.com/articles/java-singletons-using-enum
+     * @param args
      */
     public static void main(String[] args) {
 
