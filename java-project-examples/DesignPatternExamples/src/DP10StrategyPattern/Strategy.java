@@ -1,2 +1,5 @@
-package DP10StrategyPattern;public interface Strategy {
+package DP10StrategyPattern;
+
+public interface Strategy {
+    public int doOperation(int num1, int num2);
 }

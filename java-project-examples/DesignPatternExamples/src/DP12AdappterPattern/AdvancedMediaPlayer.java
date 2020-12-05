@@ -1,2 +1,7 @@
-package DP12AdappterPattern;public class AdvancedMediaPlayer {
+package DP12AdappterPattern;
+
+public interface AdvancedMediaPlayer {
+
+    public void playVlc(String fileName);
+    public void playMp4(String fileName);
 }

@@ -1,2 +1,5 @@
-package DP13BridgePattern;public interface DrawAPI {
+package DP13BridgePattern;
+
+public interface DrawAPI {
+    public void drawCircle(int radius, int x, int y);
 }
