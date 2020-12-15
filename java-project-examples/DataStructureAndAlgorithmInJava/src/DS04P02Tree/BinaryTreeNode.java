@@ -1,6 +1,7 @@
 package DS04P02Tree;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class BinaryTreeNode implements BinaryTreePosition {
 
@@ -25,19 +26,19 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
         element = e;
 
-        if(null != p ) {
-            if(asLChild) {
+        if (null != p) {
+            if (asLChild) {
                 p.attachL(this);
-            }else {
+            } else {
                 p.attachR(this);
             }
         }
 
-        if(lChild != null) {
+        if (lChild != null) {
             attachL(lChild);
         }
 
-        if(rChild != null) {
+        if (rChild != null) {
             attachR(rChild);
         }
     }
@@ -55,7 +56,7 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
     @Override
     public boolean hasParent() {
-        return parent != null ;
+        return parent != null;
     }
 
     @Override
@@ -76,7 +77,7 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
     @Override
     public boolean isLChild() {
-        return ( hasParent() && this == getParent().getLChild() );
+        return (hasParent() && this == getParent().getLChild());
     }
 
     @Override
@@ -96,12 +97,12 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
     @Override
     public boolean isRChild() {
-        return ( hasRChild() && this == getParent().getRChild() );
+        return (hasRChild() && this == getParent().getRChild());
     }
 
     @Override
     public boolean hasRChild() {
-        return rChild != null ;
+        return rChild != null;
     }
 
     @Override
@@ -132,15 +133,15 @@ public class BinaryTreeNode implements BinaryTreePosition {
     @Override
     public void updateSize() {
         size = 1;
-        if(hasLChild()) {
+        if (hasLChild()) {
             size += getLChild().getSize();
         }
 
-        if(hasRChild()) {
+        if (hasRChild()) {
             size += getRChild().getSize();
         }
 
-        if(hasParent()) {
+        if (hasParent()) {
             getParent().updateSize();
         }
     }
@@ -152,46 +153,147 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
     @Override
     public void updateHeight() {
+        height = 0;
+        if (hasLChild()) {
+            height = Math.max(height, 1 + getLChild().getHeight()); // Left
+        }
 
+        if (hasRChild()) {
+            height = Math.max(height, 1 + getRChild().getHeight());
+        }
+
+        if (hasParent()) {
+            getParent().updateHeight();
+        }
     }
 
     @Override
     public int getDepth() {
-        return 0;
+        return depth;
     }
 
     @Override
     public void updateDepth() {
+        depth = hasParent() ? 1 + getParent().getDepth() : 0;
 
+        if (hasLChild()) {
+            getLChild().updateDepth();
+        }
+
+        if (hasRChild()) {
+            getRChild().updateDepth();
+        }
     }
 
     @Override
     public BinaryTreePosition getPrev() {
-        return null;
+        if (hasLChild()) {
+            return findMaxDescendant(getLChild());
+        }
+
+        if (isRChild()) {
+            return getParent();
+        }
+
+        BinaryTreePosition v = this;
+
+        while (v.isLChild()) {
+            v = v.getParent();
+        }
+
+        return v.getParent();
     }
 
     @Override
     public BinaryTreePosition getSucc() {
-        return null;
+        if (hasRChild()) {
+            return findMinDescendant(getRChild());
+        }
+
+        if (isLChild()) {
+            return getParent();
+        }
+
+        BinaryTreePosition v = this;
+
+        while (v.isRChild()) {
+            v = v.getParent();
+        }
+        return v.getParent();
     }
 
     @Override
     public BinaryTreePosition secede() {
-        return null;
+        if (parent != null) {
+            if (isLChild()) {
+                parent.setLChild(null);
+            } else {
+                parent.setRChild(null);
+            }
+
+            parent.updateSize();
+            parent.updateHeight();
+
+            parent = null;
+
+            updateDepth();
+        }
+        return this;
     }
 
     @Override
     public BinaryTreePosition attachL(BinaryTreePosition c) {
-        return null;
+        if (hasLChild()) {
+            getLChild().secede();
+        }
+
+        if (c != null) {
+            c.secede();
+            lChild = c;
+            c.setParent(this);
+
+            updateSize();
+            updateHeight();
+
+            c.updateDepth();
+        }
+        return this;
     }
 
     @Override
     public BinaryTreePosition attachR(BinaryTreePosition c) {
-        return null;
+        if (hasRChild()) {
+            getRChild().secede();
+        }
+
+        if (c != null) {
+
+            c.secede();
+
+            rChild = c;
+            c.setParent(this);
+
+            updateSize();
+            updateHeight();
+
+            c.updateDepth();
+
+        }
+
+        return this;
     }
 
     @Override
     public Iterator elementsPreOrder() {
+
+        /*
+        List list = new TreeLinkedList();
+
+        elementsPreOrder(list, this);
+
+        return list.elements();
+
+         */
         return null;
     }
 
@@ -207,6 +309,18 @@ public class BinaryTreeNode implements BinaryTreePosition {
 
     @Override
     public Iterator elementsLevelOrder() {
+        return null;
+    }
+
+
+    // Helper Method;
+    protected static BinaryTreePosition findMinDescendant(BinaryTreePosition v) {
+        return null;
+    }
+
+
+    // Helper Method;
+    protected static BinaryTreePosition findMaxDescendant(BinaryTreePosition v) {
         return null;
     }
 }
