@@ -36,6 +36,74 @@ class BinaryTree:
     def setRootVal(self, newVal):
         self.key = newVal
 
+    def preorder(self):
+        print(self.key)
+
+        if self.leftChild:
+            self.leftChild.preorder()
+
+        if self.rightChild:
+            self.rightChild.preorder()
+
+    def postorder(self):
+
+        if self.leftChild:
+            self.leftChild.preorder()
+
+        if self.rightChild:
+            self.rightChild.preorder()
+
+        print(self.key)
+
+    def inorder(self):
+        if self.leftChild:
+            self.leftChild.preorder()
+
+        print(self.key)
+
+        if self.rightChild:
+            self.rightChild.preorder()
+
+
+def preorder(tree):
+    if tree:
+        print(tree.getRootVal())
+        preorder(tree.getLeftChild())
+        preorder(tree.getRightChild())
+
+
+def postorder(tree):
+    if tree:
+        preorder(tree.getLeftChild())
+        preorder(tree.getRightChild())
+        print(tree.getRootVal())
+
+
+def inorder(tree):
+    if tree:
+        preorder(tree.getLeftChild())
+        print(tree.getRootVal())
+        preorder(tree.getRightChild())
+
+
+def level_order(root):
+    if root is None:
+        return None
+
+    queue = [root]
+
+    while queue:
+
+        while len(queue) > 0:
+            node = queue.pop(0)
+
+            print(node.key)
+            if node.leftChild:
+                queue.append(node.leftChild)
+
+            if node.rightChild:
+                queue.append(node.rightChild)
+
 
 if __name__ == '__main__':
     r = BinaryTree('a')
@@ -51,3 +119,15 @@ if __name__ == '__main__':
     print(r.getRightChild().getRootVal())
     r.getRightChild().setRootVal('hello')
     print(r.getRightChild().getRootVal())
+
+    print("--- preorder ---")
+    print(r.preorder())
+
+    print("--- postorder ---")
+    print(r.postorder())
+
+    print("--- inorder ---")
+    print(r.inorder())
+
+    print("--- level_order ---")
+    level_order(r)
